@@ -3,6 +3,13 @@
 It is a library which can be implemented in an ARDUINO<br />
 You can train your neuralnetwork with your computer with the Machine learning algorithm<br />
 You can find in src or in my other repository in my github<br />
+
+<h3>Compilation</h3>
+
+You don't need special library, all was done without.<br/>
+Just <code> ~$ make</code><br/>
+
+
 <h3>Train your neural network</h3>
 
 You train your neural network on your computer, it's the first step<br/>
