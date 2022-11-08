@@ -26,29 +26,6 @@ int main(int argc, char **argv){
         cout << "Extraction du réseau de neurones pour l'envoyer dans l'arduino" << endl;
         filename = argv[1];
         cout << "fichier:" << filename << endl;
-    }else if(argc==1){
-        cout << "Extraction du réseau de neurones pour l'envoyer dans l'arduino" << endl;
-        std::string path = TRAINMODEL_FOLDER;
-        cout << "Selection du meilleur réseau de neurones dans "<< path << endl;
-        int max_score = 0;
-        smatch m;
-        regex r("_([0-9]+).ml");
-        for (const auto & entry : fs::directory_iterator(path)){
-            string name = entry.path();
-            regex_search(name,m,r);
-            int score = 0;
-            if(m.size()>0){
-                auto v = m[1];
-                //cout << "score:" << v << endl;
-                score = stoi(v);
-                if(score>max_score){
-                    max_score = score;
-                    filename = name;
-                }
-            }
-            
-        }
-        cout << "filename:" << filename << endl;
     }else{
         cout << "Argument error" << endl;
         cout << argv[0] << " path_to_neuralnetwork.ml" << endl;

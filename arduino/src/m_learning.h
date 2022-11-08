@@ -9,6 +9,11 @@
  
 #include <math.h>
 #include <string.h>
+
+
+#define MAX_NEURON_PER_LINE 30
+#define MAX_LINE_LEARNING 5
+
 //#include <vector>
 
 //#include <cstdlib>
@@ -52,13 +57,14 @@ class NetworkNeuron
 {
 public:
 	NetworkNeuron(int size, NetworkNeuron *before);
+	~NetworkNeuron();
 	void set_after(NetworkNeuron *after);
 	bool is_end() const;
 	NetworkNeuron* getme();
 	int get_number_neuron() const;
 	Neuron* get_neuron(int index);
 protected:
-	std::vector<Neuron> neurons;
+	std::vector<Neuron*> neurons;
 	NetworkNeuron *beforeNetwork, *afterNetwork;
 };
 
@@ -67,6 +73,7 @@ class MachineLearning
 public:
 	MachineLearning();
 	MachineLearning(int sizeInput);
+	~MachineLearning();
 	void open(int sizeInput);
 	void setInput(char *data);
 	void setInput(char *data, int size, int cursor);
@@ -82,7 +89,7 @@ public:
 	bool backupTraining(const char *data);
 	int getPrediction();
 protected:
-	std::vector<NetworkNeuron> Lines;
+	std::vector<NetworkNeuron*> Lines;
 };
 
 #endif

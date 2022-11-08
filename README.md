@@ -27,6 +27,7 @@ It will extract all the information in a line, you will just paste in your ardui
 <h3>Implementation on arduino</h3>
 
 Once you have done the previous step, you have to import the library m_learning for arduino in the folder arduino.<br/>
+And you have to install ArduinoSTL on your arduino program<br/>
 And after that you will be able to use your neural network on your arduino !
 
 ![My Image](documentation/2.png)
