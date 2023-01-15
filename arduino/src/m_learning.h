@@ -9,6 +9,7 @@
  
 #include <math.h>
 #include <string.h>
+//#include <Array.h>
 
 
 #define MAX_NEURON_PER_LINE 30
@@ -87,6 +88,7 @@ public:
 	int getNumberColumn() const; 
 	double getPrecision(NetworkNeuron& result);
 	bool backupTraining(const char *data);
+	bool loadStructure(const char *data);
 	int getPrediction();
 protected:
 	std::vector<NetworkNeuron*> Lines;

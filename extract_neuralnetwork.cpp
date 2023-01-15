@@ -7,6 +7,7 @@
 
 #define TRAINMODEL_FOLDER "../resources/trained_model/"
 #define SAVE_FILE "../resources/extracted/data.txt"
+#define BRAIN_NAME "brain_TP_time_"
 
 namespace fs = std::filesystem;
 using namespace std;
@@ -26,6 +27,29 @@ int main(int argc, char **argv){
         cout << "Extraction du réseau de neurones pour l'envoyer dans l'arduino" << endl;
         filename = argv[1];
         cout << "fichier:" << filename << endl;
+    }else if(argc==1){
+        cout << "Extraction du réseau de neurones pour l'envoyer dans l'arduino" << endl;
+        std::string path = TRAINMODEL_FOLDER;
+        cout << "Selection du meilleur réseau de neurones dans "<< path << endl;
+        int max_score = 0;
+        smatch m;
+        regex r((string(BRAIN_NAME)+"([0-9]+).ml").c_str());
+        for (const auto & entry : fs::directory_iterator(path)){
+            string name = entry.path();
+            regex_search(name,m,r);
+            int score = 0;
+            if(m.size()>0){
+                auto v = m[1];
+                //cout << "score:" << v << endl;
+                score = stoi(v);
+                if(score>max_score){
+                    max_score = score;
+                    filename = name;
+                }
+            }
+            
+        }
+        cout << "filename:" << filename << endl;
     }else{
         cout << "Argument error" << endl;
         cout << argv[0] << " path_to_neuralnetwork.ml" << endl;
@@ -48,7 +72,7 @@ int main(int argc, char **argv){
         string data = "";
         cout << "Code arduino:" <<endl;
         int size = filesize(filename.c_str());
-        data="const PROGMEM char data["+to_string(size)+"]={";
+        data="const PROGMEM char neuralnetwork_data["+to_string(size)+"]={";
         char buffer = 0;
         for(int i=0;i<size;i++){
             file.read(&buffer,1);
